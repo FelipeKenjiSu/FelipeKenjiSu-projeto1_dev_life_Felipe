@@ -13,7 +13,7 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     
     # O seu código deve desenhar a tela do jogo aqui a partir dos valores no dicionário "estado"
     # APAGUE ESTA LINHA E A LINHA ABAIXO E ESCREVA SEU CÓDIGO AQUI
-    motor.desenha_string(janela, 0, altura_tela // 2, 'APAGUE ESTA LINHA', PRETO, BRANCO)
+    motor.desenha_string(janela, 0, altura_tela // 2, 'APAGUE ESTA LINHA', VERDE_CLARO, PRETO)
 
     motor.mostra_janela(janela)
 
