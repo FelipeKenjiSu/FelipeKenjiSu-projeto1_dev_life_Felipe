@@ -13,22 +13,22 @@ No nível básico você deve entender o código fornecido e implementar as segui
     - [X] Devolver uma posição aleatória dentro do mapa;
     - [X] Adicionar a posição à lista de posições ocupadas.
 - [X] Implementar a função `desenha_tela`:
-    - [ ] Mostrar mapa;
-    - [ ] Mostrar jogador;
-    - [ ] Mostrar objetos;
-    - [ ] Mostrar quantidade de vidas (se o jogador tiver menos vidas do que o máximo, o restante deve ser mostrado como corações brancos - exemplo: 🧡🧡🧡🤍🤍);
-    - [ ] Mostrar mensagem.
-- [ ] Implementar a função `atualiza_estado`:
-    - [ ] Mover o jogador;
-    - [ ] Impedir o jogador de sair do mapa;
-    - [ ] Ao colidir com um coração:
-        - [ ] Remover o coração da lista de objetos;
-        - [ ] Aumentar uma vida caso ainda não esteja no máximo;
-        - [ ] Não aumentar caso contrário;
-        - [ ] Adicionar uma mensagem indicando o que aconteceu.
-    - [ ] Ao colidir com um espinho:
-        - [ ] Diminuir uma vida;
-        - [ ] Terminar o jogo caso tenha atingido zero vidas (mudar `estado['tela_atual']`).
+    - [X] Mostrar mapa;
+    - [X] Mostrar jogador;
+    - [X] Mostrar objetos;
+    - [X] Mostrar quantidade de vidas (se o jogador tiver menos vidas do que o máximo, o restante deve ser mostrado como corações brancos - exemplo: 🧡🧡🧡🤍🤍);
+    - [X] Mostrar mensagem.
+- [X] Implementar a função `atualiza_estado`:
+    - [X] Mover o jogador;
+    - [X] Impedir o jogador de sair do mapa;
+    - [X] Ao colidir com um coração:
+        - [X] Remover o coração da lista de objetos;
+        - [X] Aumentar uma vida caso ainda não esteja no máximo;
+        - [X] Não aumentar caso contrário;
+        - [X] Adicionar uma mensagem indicando o que aconteceu.
+    - [X] Ao colidir com um espinho:
+        - [X] Diminuir uma vida;
+        - [X] Terminar o jogo caso tenha atingido zero vidas (mudar `estado['tela_atual']`).
 
 ### [Nível Proficiente](proficiente.md)
 
