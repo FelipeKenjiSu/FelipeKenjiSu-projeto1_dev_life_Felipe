@@ -9,10 +9,10 @@ Coloque aqui o link para o vídeo, de no máximo 2 minutos, do jogo: [LINK VÍDE
 No nível básico você deve entender o código fornecido e implementar as seguintes funcionalidades (marque com `x` as que já tiver concluido - nós utilizaremos este checklist para corrigir seu projeto):
 
 - [x] Configurar o Git e o GitHub (já deixamos esta primeira tarefa marcada como feita);
-- [ ] Implementar a função `gera_posicao_desocupada`;
-    - [ ] Devolver uma posição aleatória dentro do mapa;
-    - [ ] Adicionar a posição à lista de posições ocupadas.
-- [ ] Implementar a função `desenha_tela`:
+- [X] Implementar a função `gera_posicao_desocupada`;
+    - [X] Devolver uma posição aleatória dentro do mapa;
+    - [X] Adicionar a posição à lista de posições ocupadas.
+- [X] Implementar a função `desenha_tela`:
     - [ ] Mostrar mapa;
     - [ ] Mostrar jogador;
     - [ ] Mostrar objetos;
