@@ -13,6 +13,7 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     mapa = estado['mapa']
     inicial_y = altura_tela//2 - len(mapa)//2
     inicial_x = largura_tela//2 - len(mapa[0])//2
+    mapa_cords = []
     # O seu código deve desenhar a tela do jogo aqui a partir dos valores no dicionário "estado"
     for y in range(len(mapa)):
         for x in range(len(mapa[0])):
@@ -20,7 +21,7 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     # def gera_posicao_desocupada(posicoes_ocupadas, largura_mapa, altura_mapa):
     objetos = estado['objetos']
     posicoes_ocupadas = []
-    pos_jog = gera_posicao_desocupada(posicoes_ocupadas,len(mapa[0]),len(mapa))
+    pos_jog = estado['pos_jogador']
     motor.desenha_string(janela,pos_jog[0]+inicial_x,pos_jog[1]+inicial_y,JOGADOR,VERDE_ESCURO,AZUL)
     for objeto in objetos:
         tipo = objeto['tipo']
@@ -49,7 +50,15 @@ def atualiza_estado(estado, tecla):
     
     # Começamos apagando a mensagem anterior, pois ela já foi mostrada no frame anterior
     estado['mensagem'] = ''
-
+    if tecla == 'ESQUERDA' and estado['pos_jogador'][0]>0 :
+        estado['pos_jogador'][0] -=1
+    if tecla == 'DIREITA' and estado['pos_jogador'][0]<49:
+        estado['pos_jogador'][0] +=1
+    if tecla == 'CIMA' and estado['pos_jogador'][1]>0:
+        estado['pos_jogador'][1] -=1
+    if tecla == 'BAIXO' and estado['pos_jogador'][1]<14:
+        estado['pos_jogador'][1] +=1
+        
     # Escreva seu código para atualizar o dicionário "estado" com base na tecla apertada pelo jogador aqui
     # APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO AQUI
 
