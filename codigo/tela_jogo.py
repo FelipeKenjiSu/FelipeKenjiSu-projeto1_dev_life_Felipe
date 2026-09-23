@@ -9,7 +9,7 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     # Utilize o dicionário estado para saber onde o jogador e os outros objetos estão.
     # Por exemplo, para saber a posição do jogador, use estado['pos_jogador']
     # O mapa esta armazenado em estado['mapa'].
-    motor.preenche_fundo(janela, PRETO)
+    motor.preenche_fundo(janela,PRETO)
     mapa = estado['mapa']
     inicial_y = altura_tela//2 - len(mapa)//2
     inicial_x = largura_tela//2 - len(mapa[0])//2
@@ -46,11 +46,8 @@ def atualiza_estado(estado, tecla):
     # Por exemplo, se o jogador apertar a seta para a esquerda (o valor da variável será "ESQUERDA"), 
     # o seu código deve atualizar o dicionário estado['pos_jogador'][0] -= 1
 
-    # Mude o valor da chave 'tela_atual' para mudar de tela
-    
-    # Começamos apagando a mensagem anterior, pois ela já foi mostrada no frame anterior
-    estado['mensagem'] = ''
-
+    anterior = estado['pos_jogador']
+    cords = [anterior[0],anterior[1]]
     if tecla == 'ESQUERDA' and estado['pos_jogador'][0]>0 :
         estado['pos_jogador'][0] -=1
     if tecla == 'DIREITA' and estado['pos_jogador'][0]<49:
@@ -59,19 +56,24 @@ def atualiza_estado(estado, tecla):
         estado['pos_jogador'][1] -=1
     if tecla == 'BAIXO' and estado['pos_jogador'][1]<14:
         estado['pos_jogador'][1] +=1
-    for objeto in estado['objetos']:
-            if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == CORACAO:
+    objetos = estado['objetos']
+    for objeto in objetos:
+        if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == CORACAO:
                 estado['mensagem'] = 'Você pegou um coração!'
                 objeto['tipo'] = ''
                 if estado['vidas']<5:
                     estado['vidas'] +=1
-            if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == ESPINHO:
-                estado['mensagem']= 'Voce pisou em um espinho!'
-                if estado['vidas']>1:
-                    estado['vidas'] -=1
-                else:
-                    estado['tela_atual'] = SAIR
-                    print('Você perdeu o jogo!')
+        if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == ESPINHO:
+            estado['mensagem']= 'Voce pisou em um espinho!'
+            if estado['vidas']>1:
+                estado['vidas'] -=1
+            else:
+                estado['tela_atual'] = SAIR
+                print('Você perdeu o jogo!')
+        if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == '█':
+            estado['pos_jogador'] = cords
+
+    
 
 
     # Escreva seu código para atualizar o dicionário "estado" com base na tecla apertada pelo jogador aqui

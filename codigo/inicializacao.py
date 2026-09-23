@@ -54,6 +54,29 @@ def gera_objetos(quantidade, tipo, cor, largura_mapa, altura_mapa, posicoes_ocup
 def inicializa_estado():
     # Cria lista de listas, cada uma com 50 espaços em branco
     # Você pode mudar esta lista, inclusive seu tamanho, à vontade
+    estrutura = [
+    "##################################################",
+    "#          #      #                    #         #",
+    "#          #      #    ############    #         #",
+    "#          #      #    #               #         #",
+    "#          #      #    #               #         #",
+    "#          #      #    #               #         #",
+    "#          #           #               #         #",
+    "#          #############               #         #",
+    "#                                      #         #",
+    "#                 #                              #",
+    "#                 #       ################       #",
+    "###################       #              #       #",
+    "#                         #              #       #",
+    "#                         #                      #",
+    "##################################################"
+    ]
+    parede = []
+    for y in range(len(estrutura)):
+        for x in range(len(estrutura[y])):
+            if estrutura[y][x] == "#":
+                parede.append([x, y])
+
     mapa = [
         [' '] * 50,
         [' '] * 50,
@@ -71,7 +94,7 @@ def inicializa_estado():
         [' '] * 50,
         [' '] * 50,
     ]
-    
+
     largura_mapa = len(mapa[0])
     altura_mapa = len(mapa)
     
@@ -83,6 +106,14 @@ def inicializa_estado():
     objetos = []
     objetos += gera_objetos(8, CORACAO, VERMELHO, largura_mapa, altura_mapa, posicoes_ocupadas)
     objetos += gera_objetos(6, ESPINHO, VERDE_CLARO, largura_mapa, altura_mapa, posicoes_ocupadas)
+    for ordenado in parede:
+                if ordenado == pos_jogador:
+                     continue
+                objetos.append({
+                            'tipo': '█',
+                            'posicao': ordenado,
+                            'cor': MARROM_MAIS_ESCURO,
+                        })
     
     return {
         'tela_atual': TELA_JOGO,
