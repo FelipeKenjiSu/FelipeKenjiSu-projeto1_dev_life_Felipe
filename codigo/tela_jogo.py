@@ -50,6 +50,7 @@ def atualiza_estado(estado, tecla):
     
     # Começamos apagando a mensagem anterior, pois ela já foi mostrada no frame anterior
     estado['mensagem'] = ''
+
     if tecla == 'ESQUERDA' and estado['pos_jogador'][0]>0 :
         estado['pos_jogador'][0] -=1
     if tecla == 'DIREITA' and estado['pos_jogador'][0]<49:
@@ -58,7 +59,21 @@ def atualiza_estado(estado, tecla):
         estado['pos_jogador'][1] -=1
     if tecla == 'BAIXO' and estado['pos_jogador'][1]<14:
         estado['pos_jogador'][1] +=1
-        
+    for objeto in estado['objetos']:
+            if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == CORACAO:
+                estado['mensagem'] = 'Você pegou um coração!'
+                objeto['tipo'] = ''
+                if estado['vidas']<5:
+                    estado['vidas'] +=1
+            if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == ESPINHO:
+                estado['mensagem']= 'Voce pisou em um espinho!'
+                if estado['vidas']>1:
+                    estado['vidas'] -=1
+                else:
+                    estado['tela_atual'] = SAIR
+                    print('Você perdeu o jogo!')
+
+
     # Escreva seu código para atualizar o dicionário "estado" com base na tecla apertada pelo jogador aqui
     # APAGUE ESTA LINHA E ESCREVA SEU CÓDIGO AQUI
 
