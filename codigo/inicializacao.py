@@ -112,13 +112,30 @@ def inicializa_estado():
     objetos = []
     objetos += gera_objetos(8, CORACAO, VERMELHO, largura_mapa, altura_mapa, posicoes_ocupadas)
     objetos += gera_objetos(6, ESPINHO, VERDE_CLARO, largura_mapa, altura_mapa, posicoes_ocupadas)
-    objetos.append({         
-         'tipo': 'Ω',
-         'posicao':gera_posicao_desocupada(posicoes_ocupadas,largura_mapa,altura_mapa),
-         'cor':VERMELHO,
-         'probabilidade de ataque': 0.3,
-         'vidas':5
-    })
+    for i in range(4):
+        objetos.append({         
+            'tipo': 'Ω',
+            'posicao':gera_posicao_desocupada(posicoes_ocupadas,largura_mapa,altura_mapa),
+            'cor':VERMELHO,
+            'probabilidade de ataque': 0.3,
+            'vidas':5
+        })
+    for i in range(1):
+        objetos.append({         
+            'tipo': '*',
+            'posicao':gera_posicao_desocupada(posicoes_ocupadas,largura_mapa,altura_mapa),
+            'cor':ROXO,
+            'probabilidade de ataque': 0.2,
+            'vidas':10
+        })
+    for i in range(2):
+        objetos.append({         
+            'tipo': 'º',
+            'posicao':gera_posicao_desocupada(posicoes_ocupadas,largura_mapa,altura_mapa),
+            'cor':PRETO,
+            'probabilidade de ataque': 0.5,
+            'vidas':4
+        })
     for ordenado in parede:
                 if ordenado == pos_jogador:
                      continue

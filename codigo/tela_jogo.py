@@ -70,6 +70,14 @@ def atualiza_estado(estado, tecla):
             objeto['posicao'][1] -=1
         if direcao_sorteada == 'BAIXO' and objeto['posicao'][1]<14 and objeto['tipo'] == 'Ω' and estado['pos_jogador'] != objeto['posicao']:
             objeto['posicao'][1] +=1
+        if direcao_sorteada == 'ESQUERDA' and objeto['posicao'][0]>0 and objeto['tipo'] == 'º' and estado['pos_jogador'] != objeto['posicao']:
+            objeto['posicao'][0] -=1
+        if direcao_sorteada == 'DIREITA' and objeto['posicao'][0]<49 and objeto['tipo'] == 'º' and estado['pos_jogador'] != objeto['posicao']:
+            objeto['posicao'][0] +=1
+        if direcao_sorteada == 'CIMA' and objeto['posicao'][1]>0 and objeto['tipo'] == '*' and estado['pos_jogador'] != objeto['posicao']:
+            objeto['posicao'][1] -=1
+        if direcao_sorteada == 'BAIXO' and objeto['posicao'][1]<14 and objeto['tipo'] == '*' and estado['pos_jogador'] != objeto['posicao']:
+            objeto['posicao'][1] +=1
         for obj in objetos:
             if objeto['posicao'] == obj['posicao'] and obj['tipo'] == '█':
                 objeto['posicao'] = cord_monstro
@@ -89,6 +97,41 @@ def atualiza_estado(estado, tecla):
                 estado['mensagem'] = 'O monstro foi morto!'
                 estado['pos_jogador'] = objeto['posicao']
             if estado['vidas'] == 0:
+                print('Game Over!!!')
+                estado['tela_atual'] = SAIR
+        if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == '*':
+            estado['pos_jogador'] = cords
+            estado['mensagem'] = 'MONSTROOOOOO!!!!'
+            numero = random.random()
+            if numero>objeto['probabilidade de ataque']:
+                objeto['vidas'] -=1
+                estado['mensagem'] = f'Você conseguiu um ataque! Vida restante:{objeto['vidas']}'
+            else:
+                estado['vidas'] -=1
+                estado['mensagem'] = 'voce foi ferido!'
+            if objeto['vidas'] == 0:
+                objeto['tipo'] = ''
+                estado['mensagem'] = 'O monstro foi morto!'
+                estado['pos_jogador'] = objeto['posicao']
+            if estado['vidas'] == 0:
+                print('Game Over!!!')
+                estado['tela_atual'] = SAIR
+        if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == 'º':
+            estado['pos_jogador'] = cords
+            estado['mensagem'] = 'MONSTROOOOOO!!!!'
+            numero = random.random()
+            if numero>objeto['probabilidade de ataque']:
+                objeto['vidas'] -=1
+                estado['mensagem'] = f'Você conseguiu um ataque! Vida restante:{objeto['vidas']}'
+            else:
+                estado['vidas'] -=1
+                estado['mensagem'] = 'voce foi ferido!'
+            if objeto['vidas'] == 0:
+                objeto['tipo'] = ''
+                estado['mensagem'] = 'O monstro foi morto!'
+                estado['pos_jogador'] = objeto['posicao']
+            if estado['vidas'] == 0:
+                print('Game Over!!!')
                 estado['tela_atual'] = SAIR
                     
                 
