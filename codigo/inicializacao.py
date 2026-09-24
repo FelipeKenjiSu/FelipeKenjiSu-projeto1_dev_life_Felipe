@@ -94,6 +94,11 @@ def inicializa_estado():
         [' '] * 50,
         [' '] * 50,
     ]
+    
+    # Modifique a função inicializa_estado para criar monstros. Além do tipo, posição e cor, o 
+    # dicionário também deve ter as chaves 'vidas' e 'probabilidade_de_ataque'. Uma sugestão de valores: 5 
+    # vidas e probabilidade de ataque 0.3 (usaremos esses valores na próxima etapa). Ao final desta etapa 
+    # os monstros devem ser desenhados na tela.
 
     largura_mapa = len(mapa[0])
     altura_mapa = len(mapa)
@@ -103,9 +108,17 @@ def inicializa_estado():
     
     # Cria outros objetos do mapa
     posicoes_ocupadas = [pos_jogador]
+    posicoes_ocupadas += parede
     objetos = []
     objetos += gera_objetos(8, CORACAO, VERMELHO, largura_mapa, altura_mapa, posicoes_ocupadas)
     objetos += gera_objetos(6, ESPINHO, VERDE_CLARO, largura_mapa, altura_mapa, posicoes_ocupadas)
+    objetos.append({         
+         'tipo': 'Ω',
+         'posicao':gera_posicao_desocupada(posicoes_ocupadas,largura_mapa,altura_mapa),
+         'cor':VERMELHO,
+         'probabilidade de ataque': 0.3,
+         'vidas':5
+    })
     for ordenado in parede:
                 if ordenado == pos_jogador:
                      continue

@@ -4,7 +4,7 @@ from constantes import *  # Você pode usar as constantes definidas em constante
 import motor_grafico as motor  # Utilize as funções do arquivo motor_grafico.py para desenhar na tela
                                # Por exemplo: motor.preenche_fundo(janela, [0, 0, 0]) preenche o fundo de preto
 from inicializacao import gera_posicao_desocupada
-
+import random
 def desenha_tela(janela, estado, altura_tela, largura_tela):
     # Utilize o dicionário estado para saber onde o jogador e os outros objetos estão.
     # Por exemplo, para saber a posição do jogador, use estado['pos_jogador']
@@ -45,9 +45,12 @@ def atualiza_estado(estado, tecla):
     # O seu código deve atualizar o dicionário "estado" com base na tecla apertada pelo jogador
     # Por exemplo, se o jogador apertar a seta para a esquerda (o valor da variável será "ESQUERDA"), 
     # o seu código deve atualizar o dicionário estado['pos_jogador'][0] -= 1
-
+    estado['mensagem'] = ''
     anterior = estado['pos_jogador']
+    objetos = estado['objetos']
     cords = [anterior[0],anterior[1]]
+    direcoes = ["CIMA", "BAIXO", "ESQUERDA", "DIREITA"]
+    direcao_sorteada = random.choice(direcoes)
     if tecla == 'ESQUERDA' and estado['pos_jogador'][0]>0 :
         estado['pos_jogador'][0] -=1
     if tecla == 'DIREITA' and estado['pos_jogador'][0]<49:
@@ -56,8 +59,43 @@ def atualiza_estado(estado, tecla):
         estado['pos_jogador'][1] -=1
     if tecla == 'BAIXO' and estado['pos_jogador'][1]<14:
         estado['pos_jogador'][1] +=1
-    objetos = estado['objetos']
     for objeto in objetos:
+        anterior_monstro = objeto['posicao']
+        cord_monstro = [anterior_monstro[0],anterior_monstro[1]]
+        if direcao_sorteada == 'ESQUERDA' and objeto['posicao'][0]>0 and objeto['tipo'] == 'Ω' and estado['pos_jogador'] != objeto['posicao']:
+            objeto['posicao'][0] -=1
+        if direcao_sorteada == 'DIREITA' and objeto['posicao'][0]<49 and objeto['tipo'] == 'Ω' and estado['pos_jogador'] != objeto['posicao']:
+            objeto['posicao'][0] +=1
+        if direcao_sorteada == 'CIMA' and objeto['posicao'][1]>0 and objeto['tipo'] == 'Ω' and estado['pos_jogador'] != objeto['posicao']:
+            objeto['posicao'][1] -=1
+        if direcao_sorteada == 'BAIXO' and objeto['posicao'][1]<14 and objeto['tipo'] == 'Ω' and estado['pos_jogador'] != objeto['posicao']:
+            objeto['posicao'][1] +=1
+        for obj in objetos:
+            if objeto['posicao'] == obj['posicao'] and obj['tipo'] == '█':
+                objeto['posicao'] = cord_monstro
+            
+        if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == 'Ω':
+            estado['pos_jogador'] = cords
+            estado['mensagem'] = 'MONSTROOOOOO!!!!'
+            numero = random.random()
+            if numero>objeto['probabilidade de ataque']:
+                objeto['vidas'] -=1
+                estado['mensagem'] = f'Você conseguiu um ataque! Vida restante:{objeto['vidas']}'
+            else:
+                estado['vidas'] -=1
+                estado['mensagem'] = 'voce foi ferido!'
+            if objeto['vidas'] == 0:
+                objeto['tipo'] = ''
+                estado['mensagem'] = 'O monstro foi morto!'
+                estado['pos_jogador'] = objeto['posicao']
+            if estado['vidas'] == 0:
+                estado['tela_atual'] = SAIR
+                    
+                
+
+
+
+
         if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == CORACAO:
                 estado['mensagem'] = 'Você pegou um coração!'
                 objeto['tipo'] = ''
@@ -72,6 +110,7 @@ def atualiza_estado(estado, tecla):
                 print('Você perdeu o jogo!')
         if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == '█':
             estado['pos_jogador'] = cords
+            estado['mensagem'] = 'Você colidiu com uma parede!'
 
     
 

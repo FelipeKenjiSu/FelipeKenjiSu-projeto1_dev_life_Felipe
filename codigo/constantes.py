@@ -27,5 +27,5 @@ TELA_INVENTARIO = 2
 JOGADOR = '@'
 CORACAO = '♥'
 ESPINHO = '#'
-MONSTRO = '☠'
+MONSTRO = 'Ω'
 PAREDE = '█'
