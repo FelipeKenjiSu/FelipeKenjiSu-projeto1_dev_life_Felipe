@@ -35,6 +35,7 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     for elemento2 in range(vidas,branco+vidas):
         motor.desenha_string(janela,0+elemento2,0,CORACAO,PRETO,BRANCO)
     motor.desenha_string(janela,0,altura_tela-1,estado['mensagem'],PRETO,AMARELO)
+    motor.desenha_string(janela,largura_tela-len(f'Nivel: {estado['nivel']} EXP:{estado['exp']}/10'),0,f'Nivel: {estado['nivel']} EXP:{estado['exp']}/10',PRETO,ROXO)
 
 
     # desenha_string(janela, x, y, string, cor_fundo, cor_texto)
@@ -45,6 +46,7 @@ def atualiza_estado(estado, tecla):
     # O seu código deve atualizar o dicionário "estado" com base na tecla apertada pelo jogador
     # Por exemplo, se o jogador apertar a seta para a esquerda (o valor da variável será "ESQUERDA"), 
     # o seu código deve atualizar o dicionário estado['pos_jogador'][0] -= 1
+
     estado['mensagem'] = ''
     anterior = estado['pos_jogador']
     objetos = estado['objetos']
@@ -95,6 +97,7 @@ def atualiza_estado(estado, tecla):
             if objeto['vidas'] == 0:
                 objeto['tipo'] = ''
                 estado['mensagem'] = 'O monstro foi morto!'
+                estado['exp'] +=4
                 estado['pos_jogador'] = objeto['posicao']
             if estado['vidas'] == 0:
                 print('Game Over!!!')
@@ -112,6 +115,7 @@ def atualiza_estado(estado, tecla):
             if objeto['vidas'] == 0:
                 objeto['tipo'] = ''
                 estado['mensagem'] = 'O monstro foi morto!'
+                estado['exp'] +=6
                 estado['pos_jogador'] = objeto['posicao']
             if estado['vidas'] == 0:
                 print('Game Over!!!')
@@ -129,6 +133,7 @@ def atualiza_estado(estado, tecla):
             if objeto['vidas'] == 0:
                 objeto['tipo'] = ''
                 estado['mensagem'] = 'O monstro foi morto!'
+                estado['exp'] +=12
                 estado['pos_jogador'] = objeto['posicao']
             if estado['vidas'] == 0:
                 print('Game Over!!!')
@@ -154,7 +159,14 @@ def atualiza_estado(estado, tecla):
         if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == '█':
             estado['pos_jogador'] = cords
             estado['mensagem'] = 'Você colidiu com uma parede!'
-
+    forca=estado['vidas']
+    if estado['exp']>=10:
+        resto = estado['exp']%10
+        estado['exp'] = resto
+        estado['nivel'] +=1
+        estado['mensagem'] = 'Você subiu de nível!!! GANHOU 1 CORAÇÃO'
+        estado['vidas'] += 1
+        estado['max_vidas'] +=1
     
 
 

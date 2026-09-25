@@ -152,5 +152,7 @@ def inicializa_estado():
         'max_vidas': 5,  # Quantidade máxima de vidas que o jogador pode ter - o valor da chave 'vidas' nunca pode ser maior que o valor da chave 'max_vidas'
         'objetos': objetos,
         'mapa': mapa,
-        'mensagem': '',  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
+        'mensagem': '',
+        'nivel':1,
+        'exp':1  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
     }
