@@ -17,7 +17,7 @@ def desenha_tela(janela, estado, altura_tela, largura_tela):
     # O seu código deve desenhar a tela do jogo aqui a partir dos valores no dicionário "estado"
     for y in range(len(mapa)):
         for x in range(len(mapa[0])):
-            motor.desenha_string(janela,x+inicial_x,y+inicial_y,' ',VERDE_ESCURO,ROXO)
+            motor.desenha_string(janela,x+inicial_x,y+inicial_y,mapa[y][x],VERDE_ESCURO,ROXO)
     # def gera_posicao_desocupada(posicoes_ocupadas, largura_mapa, altura_mapa):
     objetos = estado['objetos']
     posicoes_ocupadas = []
@@ -61,6 +61,37 @@ def atualiza_estado(estado, tecla):
         estado['pos_jogador'][1] -=1
     if tecla == 'BAIXO' and estado['pos_jogador'][1]<14:
         estado['pos_jogador'][1] +=1
+    print(estado['pos_jogador'])
+    if estado['pos_jogador'] == [26,13] and estado['esta_na_sala'] == False:
+        estado['mapa_normal'] = estado['mapa']
+        estado['objetos_normais'] = estado['objetos']
+        secret_room = open('secret_room.txt', 'r', encoding='utf-8')
+        linhas_secretas = secret_room.readlines()
+        secret_room.close()
+        secret_room = []
+        for linha in linhas_secretas:
+            secret_room.append(list(linha.rstrip('\n'))) #list  faz algo do tipo['a','b','c'] por isso conseguimos acessar x e y do mapa
+        parede = []
+        for y in range(len(secret_room)):
+            for x in range(len(secret_room[y])):
+                if secret_room[y][x] == "#":
+                    parede.append([x, y])
+        estado['mapa'] = secret_room
+        estado['pos_jogador'] = [4, 2]
+        estado['objetos'] = []
+        for ordenado in parede:
+            estado['objetos'].append({
+                        'tipo': '█',
+                        'posicao': ordenado,
+                        'cor': MARROM_MAIS_ESCURO,
+                    })
+        estado['esta_na_sala'] = True
+    if estado['pos_jogador'] == [4,12] and estado['esta_na_sala'] == True:
+        estado['mapa'] = estado['mapa_normal']
+        estado['objetos'] = estado['objetos_normais']
+        estado['pos_jogador'] = [25,13]
+        estado['esta_na_sala'] = False
+        
     for objeto in objetos:
         anterior_monstro = objeto['posicao']
         cord_monstro = [anterior_monstro[0],anterior_monstro[1]]

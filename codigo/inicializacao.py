@@ -128,5 +128,6 @@ def inicializa_estado():
         'mensagem': '',
         'nivel':1,
         'exp':1,
-        'opcao_menu': 0  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
+        'opcao_menu': 0,
+        'esta_na_sala':False  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
     }

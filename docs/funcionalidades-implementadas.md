@@ -56,7 +56,7 @@ No nível básico você deve entender o código fornecido e implementar as segui
 - [ ] Funcionalidade 1: Personagem centralizado na tela e mapa maior do que a janela;
 - [X] Funcionalidade 2: Diferentes tipos de inimigos;
 - [ ] Funcionalidade 3: Chefão;
-- [ ] Funcionalidade 4: Sala secreta;
+- [X] Funcionalidade 4: Sala secreta;
 - [X] Funcionalidade 5: Sistema de experiência e níveis;
 - [ ] Funcionalidade 6: Itens e inventário;
 - [ ] Funcionalidade 7: Equipamento e limite de mochila;
