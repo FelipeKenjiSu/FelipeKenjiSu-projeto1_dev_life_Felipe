@@ -1,8 +1,12 @@
 import motor_grafico
 import tela_inventario
 import tela_jogo
-from constantes import SAIR, TELA_INVENTARIO, TELA_JOGO
+import tela_inicial
+import instrucoes
+import gameover
+from constantes import SAIR, TELA_INVENTARIO, TELA_JOGO,TELA_INICIO,INSTRUCOES,GAME_OVER
 from inicializacao import inicializa_estado
+
 
 
 def jogo(janela, altura_tela, largura_tela):
@@ -37,6 +41,21 @@ def jogo(janela, altura_tela, largura_tela):
             tela_inventario.desenha_tela(janela, estado, altura_tela, largura_tela)
             tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
             tela_inventario.atualiza_estado(estado, tecla_apertada)
+        elif estado['tela_atual'] == TELA_INICIO:
+            tela_inicial.desenha_tela(janela, estado, altura_tela, largura_tela)
+            tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
+            tela_inicial.atualiza_estado(estado, tecla_apertada)
+            if estado['tela_atual'] == TELA_JOGO:
+                estado = inicializa_estado()
+                estado['tela_atual'] = TELA_JOGO
+        elif estado['tela_atual'] == INSTRUCOES:
+            instrucoes.desenha_tela(janela, estado, altura_tela, largura_tela)
+            tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
+            instrucoes.atualiza_estado(estado, tecla_apertada)
+        elif estado['tela_atual'] == GAME_OVER:
+            gameover.desenha_tela(janela, estado, altura_tela, largura_tela)
+            tecla_apertada = motor_grafico.pega_tecla_apertada(janela)
+            gameover.atualiza_estado(estado, tecla_apertada)
 
 
 # Não se preocupe, você não precisa entender o que está acontecendo aqui.

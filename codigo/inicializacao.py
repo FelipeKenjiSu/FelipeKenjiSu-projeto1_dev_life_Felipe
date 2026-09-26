@@ -146,7 +146,7 @@ def inicializa_estado():
                         })
     
     return {
-        'tela_atual': TELA_JOGO,
+        'tela_atual': TELA_INICIO,
         'pos_jogador': pos_jogador,
         'vidas': 5,  # Quantidade atual de vidas do jogador - ele pode perder vidas ao colidir com espinhos ou ganhar vidas ao pegar corações
         'max_vidas': 5,  # Quantidade máxima de vidas que o jogador pode ter - o valor da chave 'vidas' nunca pode ser maior que o valor da chave 'max_vidas'
@@ -154,5 +154,6 @@ def inicializa_estado():
         'mapa': mapa,
         'mensagem': '',
         'nivel':1,
-        'exp':1  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
+        'exp':1,
+        'opcao_menu': 0  # Use esta mensagem para mostrar mensagens ao jogador, como "Você perdeu uma vida" ou "Você ganhou uma vida"
     }

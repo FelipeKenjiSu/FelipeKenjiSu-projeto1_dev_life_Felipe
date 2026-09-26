@@ -20,6 +20,9 @@ MARROM_MAIS_ESCURO = [75, 40, 0]
 SAIR = 0
 TELA_JOGO = 1
 TELA_INVENTARIO = 2
+TELA_INICIO = 3
+INSTRUCOES = 4
+GAME_OVER = 5
 
 # Objetos
 # As constantes abaixo são os caracteres que representam cada objeto no mapa.

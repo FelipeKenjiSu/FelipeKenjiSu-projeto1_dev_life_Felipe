@@ -46,7 +46,7 @@ def atualiza_estado(estado, tecla):
     # O seu código deve atualizar o dicionário "estado" com base na tecla apertada pelo jogador
     # Por exemplo, se o jogador apertar a seta para a esquerda (o valor da variável será "ESQUERDA"), 
     # o seu código deve atualizar o dicionário estado['pos_jogador'][0] -= 1
-
+    motor.desenha_string
     estado['mensagem'] = ''
     anterior = estado['pos_jogador']
     objetos = estado['objetos']
@@ -100,8 +100,7 @@ def atualiza_estado(estado, tecla):
                 estado['exp'] +=4
                 estado['pos_jogador'] = objeto['posicao']
             if estado['vidas'] == 0:
-                print('Game Over!!!')
-                estado['tela_atual'] = SAIR
+                estado['tela_atual'] = GAME_OVER
         if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == '*':
             estado['pos_jogador'] = cords
             estado['mensagem'] = 'MONSTROOOOOO!!!!'
@@ -118,8 +117,7 @@ def atualiza_estado(estado, tecla):
                 estado['exp'] +=6
                 estado['pos_jogador'] = objeto['posicao']
             if estado['vidas'] == 0:
-                print('Game Over!!!')
-                estado['tela_atual'] = SAIR
+                estado['tela_atual'] = GAME_OVER
         if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == 'º':
             estado['pos_jogador'] = cords
             estado['mensagem'] = 'MONSTROOOOOO!!!!'
@@ -136,8 +134,7 @@ def atualiza_estado(estado, tecla):
                 estado['exp'] +=12
                 estado['pos_jogador'] = objeto['posicao']
             if estado['vidas'] == 0:
-                print('Game Over!!!')
-                estado['tela_atual'] = SAIR
+                estado['tela_atual'] = GAME_OVER
                     
                 
 
@@ -147,15 +144,14 @@ def atualiza_estado(estado, tecla):
         if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == CORACAO:
                 estado['mensagem'] = 'Você pegou um coração!'
                 objeto['tipo'] = ''
-                if estado['vidas']<5:
+                if estado['vidas']<estado['max_vidas']:
                     estado['vidas'] +=1
         if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == ESPINHO:
             estado['mensagem']= 'Voce pisou em um espinho!'
             if estado['vidas']>1:
                 estado['vidas'] -=1
             else:
-                estado['tela_atual'] = SAIR
-                print('Você perdeu o jogo!')
+                estado['tela_atual'] = GAME_OVER
         if estado['pos_jogador'] == objeto['posicao'] and objeto['tipo'] == '█':
             estado['pos_jogador'] = cords
             estado['mensagem'] = 'Você colidiu com uma parede!'
