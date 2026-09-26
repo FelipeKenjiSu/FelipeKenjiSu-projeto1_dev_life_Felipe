@@ -1,9 +1,8 @@
-from random import randint
+from random import randint,choice
 
 from constantes import *  # Você pode usar as constantes definidas em constantes.py, se achar útil
                           # Por exemplo, usar a constante CORACAO é o mesmo que colocar a string '❤'
                           # diretamente no código
-
 
 def gera_posicao_desocupada(posicoes_ocupadas, largura_mapa, altura_mapa):
     # Implemente esta função para o nível básico
@@ -54,46 +53,20 @@ def gera_objetos(quantidade, tipo, cor, largura_mapa, altura_mapa, posicoes_ocup
 def inicializa_estado():
     # Cria lista de listas, cada uma com 50 espaços em branco
     # Você pode mudar esta lista, inclusive seu tamanho, à vontade
-    estrutura = [
-    "##################################################",
-    "#          #      #                    #         #",
-    "#          #      #    ############    #         #",
-    "#          #      #    #               #         #",
-    "#          #      #    #               #         #",
-    "#          #      #    #               #         #",
-    "#          #           #               #         #",
-    "#          #############               #         #",
-    "#                                      #         #",
-    "#                 #                              #",
-    "#                 #       ################       #",
-    "###################       #              #       #",
-    "#                         #              #       #",
-    "#                         #                      #",
-    "##################################################"
-    ]
+    mapas = ['mapa.txt', 'mapa2.txt', 'mapa3.txt']
+    mapa_sort = choice(mapas)
+    arquivo = open(mapa_sort,'r',encoding='utf-8') # endcoding serve para transformar 123131 em emoji sem haver conflito
+    linhas = arquivo.readlines() #readlines le tudo de uma vez e coloca em uma lista
+    arquivo.close()
+    mapa = []  # o \n surge porque em arquivos a quebra de linha/enter do mapa é interpretada pelo pc  por \n para ele pular uma linha
+    for linha in linhas:
+        mapa.append(list(linha.rstrip('\n'))) # rstrip é um strip porem o strip remove dos dois lados, e o rstrip de right strip remove somente o final do lado direito
     parede = []
-    for y in range(len(estrutura)):
-        for x in range(len(estrutura[y])):
-            if estrutura[y][x] == "#":
+    for y in range(len(mapa)):
+        for x in range(len(mapa[y])):
+            if mapa[y][x] == "#":
                 parede.append([x, y])
 
-    mapa = [
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-        [' '] * 50,
-    ]
     
     # Modifique a função inicializa_estado para criar monstros. Além do tipo, posição e cor, o 
     # dicionário também deve ter as chaves 'vidas' e 'probabilidade_de_ataque'. Uma sugestão de valores: 5 
